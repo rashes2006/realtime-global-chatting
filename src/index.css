@@ -420,3 +420,109 @@ body {
 .hidden-input {
   display: none;
 }
+
+/* -------------------------------- */
+/* Mobile Responsiveness & Keyframes*/
+/* -------------------------------- */
+
+@keyframes messageSlideInRight {
+  from { opacity: 0; transform: translate3d(20px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes messageSlideInLeft {
+  from { opacity: 0; transform: translate3d(-20px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column-reverse;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: 65px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-right: none;
+    border-top: 1px solid var(--border-color);
+    padding: 0 1rem;
+    position: relative;
+    z-index: 20;
+    flex-shrink: 0;
+  }
+
+  .sidebar-item, .sidebar-item.logout {
+    margin: 0;
+    width: 44px;
+    height: 44px;
+  }
+
+  .user-avatar {
+    margin: 0;
+    width: 38px;
+    height: 38px;
+  }
+
+  .chat-header {
+    height: 60px;
+    padding: 0 1rem;
+  }
+
+  .messages-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .message-wrapper {
+    max-width: 90%;
+  }
+
+  .message-bubble {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .input-area {
+    padding: 1rem;
+  }
+
+  .input-container {
+    padding: 0.25rem 0.25rem 0.25rem 1rem;
+  }
+
+  .chat-input {
+    font-size: 16px; /* Prevents auto-zoom on iOS */
+  }
+
+  .send-btn {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .action-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Optimized Mobile Animations utilizing hardware acceleration */
+  .message-wrapper.sent.message-animate-in {
+    animation: messageSlideInRight 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  .message-wrapper.received.message-animate-in {
+    animation: messageSlideInLeft 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  .login-card {
+    padding: 2.5rem 1.5rem;
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .login-title {
+    font-size: 1.75rem;
+  }
+}
