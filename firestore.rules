@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global chat messages — any authenticated user can read/create
+    match /messages/{messageId} {
+      allow read, create: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    // User profiles — any authenticated user can read, only owner can write
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // DM conversations — any authenticated user can read/create/update
+    match /conversations/{conversationId} {
+      allow read, create, update: if request.auth != null;
+      allow delete: if false;
+
+      // Messages inside conversations
+      match /messages/{messageId} {
+        allow read, create: if request.auth != null;
+        allow update, delete: if false;
+      }
+    }
+  }
+}
